@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css_files %}
+        <link rel="stylesheet" href="{% static "information_retrieve/forms.css" %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-control">
+                {{ form.as_p }}
+                <input style="background-color: #fa983a ; color: black" type="submit" value="Search"  class="btn btn-primary", name="form">
+            </div>
+        </form>
+    </div>
+    <br/>
+    <p>
+    {% if context == "[]" %}
+        <p style="color: black ; margin-left: 45% ; font-family: 'B Titr';font-size: 20px">سند مورد نظر یافت نشد</p>
+    {% else %}
+        <p style="color: black; margin-left: 45% ;font-family: 'B Titr' ;font-size: 20px " >: اسناد مرتبط عبارتند از </p>
+        {% for i in context %}
+            <a  style="color: black ;margin-left:10px ;text-decoration: none ; font-family: 'B Titr'"   href="https://github.com/aliesmaeli79/document/blob/master/{{ i }}.txt" >سند:{{ i }} , </a>
+        {% endfor %}
+    {% endif %}
+    </p>
+
+{% endblock %}
